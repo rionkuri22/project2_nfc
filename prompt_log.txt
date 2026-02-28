@@ -1,0 +1,6 @@
+Model: combination of Gemini and Antigravity 
+
+Code process overview 
+1. Build my userflow first: app and database with checkboxres
+2. Connect to Vercel
+3. Write URL to NFC and develop "recipient" experience
