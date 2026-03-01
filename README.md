@@ -1,18 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
+A dynamic networking tool that replaces traditional business cards with a customizable digital alternative
 
-## Getting Started
+Steps to use:
+1. Select exactly which contact detail I want to share eg) Linkedin, phone number
+2. (Optional) Add a custom "Pre-drafted Message" like "I met you (Rion Kurihara) at [Event] so that when the recipient opens my link, their app (like WhatsApp or iMessage) gets populated wih the message
+3. Present my physical NFC card or the system-generated QR code to the recipient which automatically launches my profile directly in the native app
 
-## Learn More
+## Key Features
+- 
 
-To learn more about Next.js, take a look at the following resources:
+## How to run it locally
+- Access to the app: https://project2-nfc.vercel.app/ to recreate experience of being me
+- Use QR code to make up for lack of NFC card and simulate the exprience of the "tap"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How secrets are handled
+- DATABASE_URL is stored in Vercel environment variables and also in .env file

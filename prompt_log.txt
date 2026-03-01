@@ -1,6 +1,22 @@
-Model: combination of Gemini and Antigravity 
+## Model: combination of Gemini and Antigravity 
 
-Code process overview 
+## Code process overview 
 1. Build my userflow first: app and database with checkboxres
 2. Connect to Vercel
 3. Write URL to NFC and develop "recipient" experience
+
+## Key prompts
+Create a web app that allows more efficient changing of contact info. I open app and tick off what accounts or info I want to share eg) phone number, email, Linkedin before just tapping my NFC on another. It should not just be like linktree where open website with links but autofill contact cards or open account on the actual app like Instagram
+Specifically the checkbox should have these options and look simple. The UI should not show any of the links themselves. Add app icons that are clickable. It should only allow selecting of 1. So when selecting 2nd, unselectes the 1st. 
+Instagram: https://www.instagram.com/rionkurihara22/
+LinkedIn: https://www.linkedin.com/in/rion-kurihara-2b8a8b215/
+Whatsapp: https://wa.me/817013890622
+Imessages: my number is +4126702184. Figure out a link for this. 
+Basic Userflow
+I meet someone in person. We discuss wanting to exchange contact info. Instagram? Linkedin? Imessages? We discuss our options and settle on Linkedin.
+I go on my phone and open app. I use checkboxes to select Linkedin from my list of potential contact info that I could share.
+I tap my NFC sticker or card to theri phone and they automatically see instagam open with my specific account already opened. They can follow if they want.
+Make it so that NFC Tag is static but based on what is selected in app, changes the /share end part of the url for opening when tapped NFC
+I have already set up Neon as the backend with node.js. It is in .env.
+I have Vercel ready to be connected as soon as first MVP is done. 
+I have the NFC card physically ready to connect after this is deployed to Vercel. 
