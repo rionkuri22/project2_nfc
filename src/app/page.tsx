@@ -91,7 +91,6 @@ export default function Home() {
     <main>
       <div className="header">
         <h1 className="title">WhichMe</h1>
-        <p className="subtitle">Select an app below, then let them scan your QR code.</p>
       </div>
 
       <div className="qr-container">
