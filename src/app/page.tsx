@@ -90,18 +90,8 @@ export default function Home() {
   return (
     <main>
       <div className="header">
-        <h1 className="title">Rion, how do you want to connect today?</h1>
+        <h1 className="title">WhichMe</h1>
         <p className="subtitle">Select an app below, then let them scan your QR code.</p>
-        <div className="context-input-container">
-          <input
-            type="text"
-            className="context-input"
-            placeholder="Where did we meet? (e.g. CMUhacks)"
-            value={contextMessage}
-            onChange={(e) => setContextMessage(e.target.value)}
-            onBlur={handleContextBlur}
-          />
-        </div>
       </div>
 
       <div className="qr-container">
