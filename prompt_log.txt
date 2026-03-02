@@ -1,9 +1,14 @@
 ## Model: combination of Gemini and Antigravity 
 
-## Code process overview 
-1. Build my userflow first: app and database with checkboxres
-2. Connect to Vercel
-3. Write URL to NFC and develop "recipient" experience
+## Dev process overview 
+1. Consult Gemini to research existing products, technical limitations, and polish the final idea
+2. Set up Neon DB and securely connect it via .env
+3. Have Antigravity set up all Next.js environment and first MVP
+5. Chat with both Gemini and Antigravity to understand the code
+6. Manually rewrite CSS to match it with my personal website aesthetic
+7. Connect to Vercel and write to NFC
+8. Add QR code feature 
+9. Add context input and pre-filled message feature
 
 ## Key prompts
 Create a web app that allows more efficient changing of contact info. I open app and tick off what accounts or info I want to share eg) phone number, email, Linkedin before just tapping my NFC on another. It should not just be like linktree where open website with links but autofill contact cards or open account on the actual app like Instagram
