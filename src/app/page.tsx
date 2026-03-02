@@ -128,6 +128,17 @@ export default function Home() {
         )}
       </div>
 
+      <div className="context-input-container">
+        <input
+          type="text"
+          className="context-input"
+          placeholder="Where did we meet?"
+          value={contextMessage}
+          onChange={(e) => setContextMessage(e.target.value)}
+          onBlur={handleContextBlur}
+        />
+      </div>
+
       <div className="options-container">
         {PLATFORMS.map((platform) => {
           const isActive = activePlatform === platform.id;
