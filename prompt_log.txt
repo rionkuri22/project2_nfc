@@ -20,3 +20,7 @@ Make it so that NFC Tag is static but based on what is selected in app, changes 
 I have already set up Neon as the backend with node.js. It is in .env.
 I have Vercel ready to be connected as soon as first MVP is done. 
 I have the NFC card physically ready to connect after this is deployed to Vercel. 
+
+Now make it so that instagram is not selected as deafult. When loaded nothing shuold be selected.
+
+Make the links to Whatsapp and imessages open dm with a pre-written draft only when I input context of meeting etc into text box in UI. I would type class name, project name, event name or location and that info should be turned into a short message like Hi I met you (Rion Kurihara) today at [fill].

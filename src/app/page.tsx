@@ -38,32 +38,52 @@ const PLATFORM_LINKS: Record<Platform, string> = {
 
 export default function Home() {
   const [activePlatform, setActivePlatform] = useState<Platform | null>(null);
+  const [contextMessage, setContextMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
 
-  const handleSelect = async (platformId: Platform) => {
-    if (platformId === activePlatform) return;
+  // Helper to generate dynamic deep links
+  const getDynamicUrl = (platform: Platform, context: string) => {
+    const base = PLATFORM_LINKS[platform];
+    if (!context.trim()) return base;
 
-    // Optimistic UI update
-    setActivePlatform(platformId);
+    // Only WhatsApp and iMessage support pre-filled draft texts
+    if (platform === 'whatsapp') {
+      return `${base}?text=${encodeURIComponent('Hi I met you (Rion Kurihara) today at ' + context.trim())}`;
+    } else if (platform === 'imessage') {
+      return `${base}&body=${encodeURIComponent('Hi I met you (Rion Kurihara) today at ' + context.trim())}`;
+    }
+    return base;
+  };
 
+  const saveStateToDB = async (platformId: Platform, context: string) => {
     try {
       const res = await fetch('/api/selection', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ platform: platformId }),
+        body: JSON.stringify({ platform: platformId, context_message: context }),
       });
 
       if (res.ok) {
-        // Show success toast
         setShowToast(false);
         setTimeout(() => setShowToast(true), 50);
         setTimeout(() => setShowToast(false), 3000);
       } else {
-        // Revert on failure (simplified for MVP)
-        console.error('Failed to update');
+        console.error('Failed to update DB');
       }
     } catch (error) {
       console.error('Error updating platform', error);
+    }
+  };
+
+  const handleSelect = (platformId: Platform) => {
+    if (platformId === activePlatform) return;
+    setActivePlatform(platformId);
+    saveStateToDB(platformId, contextMessage);
+  };
+
+  const handleContextBlur = () => {
+    if (activePlatform) {
+      saveStateToDB(activePlatform, contextMessage);
     }
   };
 
@@ -72,13 +92,23 @@ export default function Home() {
       <div className="header">
         <h1 className="title">Rion, how do you want to connect today?</h1>
         <p className="subtitle">Select an app below, then let them scan your QR code.</p>
+        <div className="context-input-container">
+          <input
+            type="text"
+            className="context-input"
+            placeholder="Where did we meet? (e.g. CMUhacks)"
+            value={contextMessage}
+            onChange={(e) => setContextMessage(e.target.value)}
+            onBlur={handleContextBlur}
+          />
+        </div>
       </div>
 
       <div className="qr-container">
         {activePlatform ? (
           <div className="qr-box">
             <QRCodeSVG
-              value={PLATFORM_LINKS[activePlatform]}
+              value={getDynamicUrl(activePlatform, contextMessage)}
               size={200}
               bgColor={"#ffffff"}
               fgColor={"#111827"}
@@ -86,6 +116,9 @@ export default function Home() {
               includeMargin={true}
             />
             <p className="qr-hint">Scan to open {PLATFORMS.find(p => p.id === activePlatform)?.name}</p>
+            {contextMessage && (activePlatform === 'whatsapp' || activePlatform === 'imessage') && (
+              <p className="qr-subhint">Draft message attached!</p>
+            )}
           </div>
         ) : (
           <div className="qr-box empty">

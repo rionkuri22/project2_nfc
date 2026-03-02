@@ -10,14 +10,24 @@ const PLATFORM_LINKS: Record<string, string> = {
 
 export async function GET() {
     try {
-        const res = await pool.query('SELECT active_platform FROM settings LIMIT 1');
+        const res = await pool.query('SELECT active_platform, context_message FROM settings LIMIT 1');
 
         let platform = 'instagram'; // Fallback
+        let contextMessage = '';
         if (res.rows.length > 0) {
             platform = res.rows[0].active_platform;
+            contextMessage = res.rows[0].context_message || '';
         }
 
-        const targetUrl = PLATFORM_LINKS[platform] || PLATFORM_LINKS['instagram'];
+        let targetUrl = PLATFORM_LINKS[platform] || PLATFORM_LINKS['instagram'];
+
+        if (contextMessage.trim()) {
+            if (platform === 'whatsapp') {
+                targetUrl = `${targetUrl}?text=${encodeURIComponent('Hi I met you (Rion Kurihara) today at ' + contextMessage.trim())}`;
+            } else if (platform === 'imessage') {
+                targetUrl = `${targetUrl}&body=${encodeURIComponent('Hi I met you (Rion Kurihara) today at ' + contextMessage.trim())}`;
+            }
+        }
 
         return NextResponse.redirect(targetUrl, 302);
     } catch (error) {
